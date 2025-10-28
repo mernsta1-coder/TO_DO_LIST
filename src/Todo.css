@@ -1,0 +1,80 @@
+.YoursTodos {
+    justify-content: space-around;
+    display: flex;
+}
+.line-through {
+    color: gray;
+    text-decoration: line-through;
+}.displayitems {
+    justify-content: start;
+    display: flex;
+}
+.Background {
+    min-height: 80vh;
+    background-color: lightsteelblue;
+}
+h2 {
+    font-family: cursive;
+    font-size: xx-large;
+    text-align: center;
+}
+.container1 {
+    display: flex;
+    justify-content: space-around;
+}input[type="text"] {
+    font-family: cursive;
+    border: transparent;
+    border-bottom: 2px solid black;
+    font-size: 15px;
+    font-weight: bold;
+    background: transparent;
+    width: 60%;
+    border-radius: 10px;
+    padding: 7px 54px 0 20px;
+    margin: 2px 33px;
+    color: currentColor;
+}
+ .btn1{
+    padding: 2px 40px;
+    font-size: 29px;
+    font-weight: bold;
+    color: rebeccapurple;
+    background-color: #ecdcc7;
+    border-radius: 12px;
+    border-top: transparent;
+}h3 {
+    padding: 6px 80px;
+    font-size: xx-large;
+    font-family: cursive;
+}
+input[type="checkbox"] {
+    margin: 10px 44px;
+}
+.item1 {
+    font-family: cursive;
+    padding: 9px 30px;
+    align-items: center;
+    width: 60%;
+}
+input.item2 {
+    border-left: transparent;
+    border-right: transparent;
+    background-color: #ed143dad;
+    border-top: transparent;
+    border-radius: 10px 15px 11px 3px;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 5px 13px;
+    padding: 5px 14px;
+}
+input.item3 {
+    border-left: transparent;
+    border-right: transparent;
+    background-color: #14ed5aad;
+    border-top: transparent;
+    border-radius: 10px 15px 11px 3px;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 5px 13px;
+    padding: 5px 14px;
+}

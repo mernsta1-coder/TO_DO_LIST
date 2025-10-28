@@ -1,0 +1,13 @@
+ul li {
+    display: inline;
+    padding: 0px 21px;
+}
+ul {
+    display: inline;
+}
+nav.Navar {
+    display: flex;
+    justify-content: space-around;
+    background-color: black;
+    color:white;
+}
