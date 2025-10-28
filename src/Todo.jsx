@@ -9,7 +9,7 @@ const Todo = () => {
     const [todo,settodo] = useState("");
     const [todos,settodos] = useState([]);
      const firstRender = useRef(true);
-    console.log("todos2", todos)
+
     
     useEffect(()=> {
       let toString = localStorage.getItem("todos");
@@ -45,14 +45,11 @@ const Todo = () => {
   // savetOLS();
 };
 const savetOLS = () =>{
-  console.log("hjgjhgjg", todos)
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
     const handleSave = (e) =>{
-      console.log("todos9999999999999999999999999999999999", todos)
         settodos([...todos, { id: uuidv4(), todo, isCompleted: false }]);
-        console.log("todos444", todos);
         settodo("")
 
         }
@@ -60,7 +57,6 @@ const savetOLS = () =>{
     const handleDelete = (id) =>{
         let newtodos = todos.filter(item => item.id !== id);
         settodos(newtodos);
-        // savetOLS();
     }
     const handleChange = (e)=>{
         settodo(e.target.value)
@@ -68,12 +64,11 @@ const savetOLS = () =>{
     }
    const checkbox = (e) => {
   const id = e.target.name; // or e.target.id if you set id on input
-console.log("todos33333", todos)
   const index = todos.findIndex(item => item.id === id);
   let newtodos = [...todos];
   newtodos[index].isCompleted =! newtodos[index].isCompleted;
   settodos(newtodos);
-  // savetOLS();
+
 };
 
   return (
