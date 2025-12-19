@@ -28,14 +28,14 @@ const Todo = () => {
     };
   };
 
-  // ✅ Fetch todos on component mount
+  // Fetch todos on component mount
   useEffect(() => {
     const fetchTodos = async () => {
       const config = getConfig();
       if (!config) return;
 
       try {
-        const res = await axios.get(import.meta.env.VITE_APP_GET, config);
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/todo/get`, config);
         settodos(res.data.todos);
       } catch (err) {
         console.error("Failed to fetch todos:", err);
@@ -63,7 +63,7 @@ const Todo = () => {
     }
   };
 
-  // ✅ SAVE TODO
+  // SAVE TODO
   const handleSave = async () => {
     const regex = /^[A-Za-z0-9\s.,!?-]{1,100}$/;
 
@@ -89,10 +89,14 @@ const Todo = () => {
     if (!config) return;
 
     try {
-      await axios.post(import.meta.env.VITE_APP_SAVE, { title: todo }, config);
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/todo/save`,
+        { title: todo },
+        config
+      );
       settodo("");
 
-      const res = await axios.get(import.meta.env.VITE_APP_GET, config);
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/todo/get`, config);
       settodos(res.data.todos);
       toast.success("Todo added successfully!");
     } catch (err) {
@@ -101,7 +105,7 @@ const Todo = () => {
     }
   };
 
-  // ✅ DELETE ONE
+  // DELETE ONE TODO
   const handleDelete = async (id) => {
     const ok = window.confirm("Do you want to delete this todo?");
     if (!ok) return;
@@ -110,9 +114,12 @@ const Todo = () => {
     if (!config) return;
 
     try {
-      await axios.delete(`${import.meta.env.VITE_APP_DELETEONE}${id}`, config);
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/todo/delete/${id}`,
+        config
+      );
 
-      const res = await axios.get(import.meta.env.VITE_APP_GET, config);
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/todo/get`, config);
       settodos(res.data.todos);
       toast.success("Todo deleted successfully!");
     } catch (err) {
@@ -121,32 +128,32 @@ const Todo = () => {
     }
   };
 
-  // ✅ EDIT TODO (update title)
-  // ✅ EDIT TODO (move to input and delete from list)
-const handleEdit = async (id, currentTitle) => {
-  // Set input box to current todo title
-  settodo(currentTitle);
+  // EDIT TODO
+  const handleEdit = async (id, currentTitle) => {
+    settodo(currentTitle);
 
-  const config = getConfig();
-  if (!config) return;
+    const config = getConfig();
+    if (!config) return;
 
-  try {
-    // Delete the todo from backend
-    await axios.delete(`${import.meta.env.VITE_APP_DELETEONE}${id}`, config);
+    try {
+      // Delete the existing todo
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/todo/delete/${id}`,
+        config
+      );
 
-    // Refresh the todos list
-    const res = await axios.get(import.meta.env.VITE_APP_GET, config);
-    settodos(res.data.todos);
+      // Refresh todos
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/todo/get`, config);
+      settodos(res.data.todos);
 
-    toast.info("Todo is ready to edit. Update the text and click Save.");
-  } catch (err) {
-    console.error("Edit todo error:", err);
-    toast.error(err.response?.data?.message || "Something went wrong!");
-  }
-};
+      toast.info("Todo is ready to edit. Update the text and click Save.");
+    } catch (err) {
+      console.error("Edit todo error:", err);
+      toast.error(err.response?.data?.message || "Something went wrong!");
+    }
+  };
 
-
-  // ✅ TOGGLE COMPLETED
+  // TOGGLE COMPLETED
   const handleCheckbox = async (id) => {
     const index = todos.findIndex((item) => item._id === id);
     if (index === -1) return;
@@ -160,7 +167,7 @@ const handleEdit = async (id, currentTitle) => {
 
     try {
       await axios.put(
-        `${import.meta.env.VITE_APP_UPDATE}${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/todo/update/${id}`,
         { isCompleted: newTodos[index].isCompleted },
         config
       );
@@ -174,7 +181,7 @@ const handleEdit = async (id, currentTitle) => {
     }
   };
 
-  // ✅ DELETE ALL TODOS
+  // DELETE ALL TODOS
   const deleteAll = async () => {
     if (todos.length === 0) {
       toast.error("You don't have any todos");
@@ -188,7 +195,10 @@ const handleEdit = async (id, currentTitle) => {
     if (!config) return;
 
     try {
-      await axios.delete(import.meta.env.VITE_APP_DELETEALL, config);
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/todo/delete-all`,
+        config
+      );
       settodos([]);
       toast.success("All todos deleted successfully!");
     } catch (err) {
@@ -197,7 +207,7 @@ const handleEdit = async (id, currentTitle) => {
     }
   };
 
-  // ✅ INPUT CHANGE
+  // INPUT CHANGE
   const handleChange = (e) => {
     settodo(e.target.value);
   };
