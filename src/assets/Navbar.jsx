@@ -1,4 +1,3 @@
-import React from 'react'
 import './Navbar.css'
 
 const Navbar = () => {
@@ -9,6 +8,7 @@ const Navbar = () => {
         <ul>
         <li>Home</li>
         <li>Your Task</li>
+        <li><input type='button' className='logoutbtn' value="logout"/></li>
     </ul>
     </div>
 

@@ -21,18 +21,6 @@ h2 {
 .container1 {
     display: flex;
     justify-content: space-around;
-}input[type="text"] {
-    font-family: cursive;
-    border: transparent;
-    border-bottom: 2px solid black;
-    font-size: 15px;
-    font-weight: bold;
-    background: transparent;
-    width: 60%;
-    border-radius: 10px;
-    padding: 7px 54px 0 20px;
-    margin: 2px 33px;
-    color: currentColor;
 }
  .btn1{
     padding: 2px 40px;
@@ -77,4 +65,16 @@ input.item3 {
     font-size: 16px;
     margin: 5px 13px;
     padding: 5px 14px;
+}
+.buttonToDeleteAll {
+    text-align: center;
+}
+input.btn100 {
+    border: aliceblue;
+    border-radius: 0px 20px 0px 14px;
+}
+input.logoutbtn {
+    background: transparent;
+    color: white;
+    border: transparent;
 }
